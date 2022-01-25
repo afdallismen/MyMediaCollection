@@ -13,10 +13,39 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Media" />
-        <ListView Grid.Row="1" x:Name="ItemList" Background="Aqua">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Media Collection" Margin="4" FontWeight="Bold" VerticalAlignment="Center" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Media Type:" Margin="4" FontWeight="Bold" VerticalAlignment="Center" />
+                <ComboBox x:Name="ItemFilter" MinWidth="120" Margin="0, 2, 4, 6" />
+            </StackPanel>
+        </Grid>
+        <ListView Grid.Row="1" x:Name="ItemList">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="BlueViolet" BorderThickness="0, 0, 0, 1">
+                            <TextBlock Text="Medium" Margin="5, 0, 0, 0" FontWeight="Bold" />
+                        </Border>
+                        <Border Grid.Column="1" BorderBrush="BlueViolet" BorderThickness="0, 0, 0, 1">
+                            <TextBlock Text="Title" Margin="5, 0, 0, 0" FontWeight="Bold" />
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:MediaItem">
                     <Grid>
@@ -30,5 +59,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button
+            x:Name="AddButton"
+            Content="Add Item"
+            HorizontalAlignment="Right"
+            Grid.Row="2"
+            Margin="8"
+            Click="AddButton_Click"
+        />
     </Grid>
 </Page>
